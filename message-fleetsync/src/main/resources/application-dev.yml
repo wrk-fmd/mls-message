@@ -1,0 +1,11 @@
+spring:
+  rabbitmq:
+    host: localhost
+    username: mls-rabbitmq-user
+    password: mls-rabbitmq-pass
+
+logging:
+  pattern:
+    console: "%d %highlight(%-5level) [%12.12thread] %cyan(%logger{5}): %msg%n"
+  level:
+    at.wrk.fmd.mls.message: debug

@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+
+application:
+  message:
+    type: phone
+
+logging:
+  level:
+    root: warn

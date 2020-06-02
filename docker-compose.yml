@@ -1,0 +1,69 @@
+version: '3.7'
+
+services:
+  mls-message-fleetsync:
+    image: wrkfmdit/mls-message-fleetsync:${MLS_TAG:-latest}
+    build:
+      context: .
+      args:
+        MODULE: message-fleetsync
+        APP: message-fleetsync
+        INSTALL: librxtx-java
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    volumes:
+      - type: bind
+        source: ${MLS_MESSAGE_FLEETSYNC_CONFIG:-./message-fleetsync/src/main/resources}
+        target: /config
+        read_only: true
+      - type: bind
+        source: ${MLS_LOG:-./log}
+        target: /log
+      - type: bind
+        source: /dev
+        target: /dev
+        read_only: true
+
+  mls-message-sms:
+    image: wrkfmdit/mls-message-sms:${MLS_TAG:-latest}
+    build:
+      context: .
+      args:
+        MODULE: message-sms
+        APP: message-sms
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    volumes:
+    - type: bind
+      source: ${MLS_MESSAGE_SMS_CONFIG:-./message-sms/src/main/resources}
+      target: /config
+      read_only: true
+    - type: bind
+      source: ${MLS_LOG:-./log}
+      target: /log
+
+  mls-message-tetra:
+    image: wrkfmdit/mls-message-tetra:${MLS_TAG:-latest}
+    build:
+      context: .
+      args:
+        MODULE: message-tetra
+        APP: message-tetra
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    volumes:
+    - type: bind
+      source: ${MLS_MESSAGE_TETRA_CONFIG:-./message-tetra/src/main/resources}
+      target: /config
+      read_only: true
+    - type: bind
+      source: ${MLS_LOG:-./log}
+      target: /log
+
+  mls-message-mock-gateway:
+    build:
+      context: ./mock-gateway
+
+networks:
+  default:
+    name: mls-network

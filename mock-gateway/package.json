@@ -1,0 +1,9 @@
+{
+  "name": "mock-gateway",
+  "description": "A simple mock HTTP server that just prints everything it receives to the console",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node gateway.js 8000"
+  }
+}

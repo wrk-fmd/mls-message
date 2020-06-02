@@ -1,0 +1,24 @@
+# This profile uses the docker-compose DNS names and is activated for the default docker-compose build
+
+spring:
+  rabbitmq:
+    host: mls-amqp
+    username: mls-rabbitmq-user
+    password: mls-rabbitmq-pass
+
+application:
+  message:
+    sms:
+      filter:
+        patterns:
+        - "\\+436\\d+"
+      gateway:
+        url: http://mls-message-mock-gateway:8000
+        username: username
+        password: password
+
+logging:
+  config: /config/log-docker.xml
+  level:
+    root: warn
+    at.wrk.fmd.mls.message: debug
