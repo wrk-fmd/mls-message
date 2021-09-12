@@ -9,6 +9,7 @@ services:
         MODULE: message-fleetsync
         APP: message-fleetsync
         INSTALL: librxtx-java
+      network: host
     environment:
       SPRING_PROFILES_ACTIVE: docker
     volumes:
@@ -31,6 +32,7 @@ services:
       args:
         MODULE: message-sms
         APP: message-sms
+      network: host
     environment:
       SPRING_PROFILES_ACTIVE: docker
     volumes:
@@ -49,6 +51,7 @@ services:
       args:
         MODULE: message-tetra
         APP: message-tetra
+      network: host
     environment:
       SPRING_PROFILES_ACTIVE: docker
     volumes:
