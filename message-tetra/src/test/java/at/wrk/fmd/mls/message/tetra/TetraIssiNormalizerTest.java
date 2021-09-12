@@ -1,16 +1,16 @@
 package at.wrk.fmd.mls.message.tetra;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TetraIssiNormalizerTest {
 
     private TetraIssiNormalizer normalizer;
 
-    @Before
+    @BeforeEach
     public void init() {
         normalizer = new TetraIssiNormalizer();
     }
