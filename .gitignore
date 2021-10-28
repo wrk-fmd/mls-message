@@ -21,7 +21,7 @@ build.xml
 
 # ignore development database and log directories
 database
-log
+log/**
 
 # ignore generated .class files
 *.class
