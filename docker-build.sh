@@ -22,3 +22,7 @@ for type in fleetsync sms tetra; do
       --build-arg MODULE=$module --build-arg APP=$app $runtime \
       -t "$tag" .
 done
+
+echo "Running Docker build for mock-gateway..."
+DOCKER_BUILDKIT=1 docker build \
+    -t "wrkfmdit/mls-message-mock-gateway:${MLS_TAG:-latest}" ./mock-gateway
