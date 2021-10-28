@@ -1,4 +1,4 @@
-name: Build mls-message-fleetsync Docker image
+name: Build mls-mock-gateway Docker image
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - dev
     paths:
       - .github/workflows/docker-mock-gateway.yml
-      - mock-gateway
+      - mock-gateway/**
 
 jobs:
   deploy:
