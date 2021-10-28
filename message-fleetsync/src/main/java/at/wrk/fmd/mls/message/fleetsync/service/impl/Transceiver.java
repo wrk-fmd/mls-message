@@ -164,7 +164,7 @@ class Transceiver implements AutoCloseable {
                 if (read == STX) {
                     // Start of message
                     if (message != null) {
-                        LOG.warn("{}: Previous message did not end, dropping '{}'", name, message.toString());
+                        LOG.info("{}: Previous message did not end, dropping '{}'", name, message.toString());
                     }
 
                     LOG.trace("{}: Starting new message", name);
@@ -173,7 +173,7 @@ class Transceiver implements AutoCloseable {
                 }
 
                 if (message == null) {
-                    LOG.warn("{}: Received data without message start, dropping '{}'", name, (char) read);
+                    LOG.info("{}: Received data without message start, dropping '{}'", name, (char) read);
                     continue;
                 }
 

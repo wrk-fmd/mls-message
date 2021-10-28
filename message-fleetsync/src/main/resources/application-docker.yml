@@ -9,5 +9,4 @@ spring:
 logging:
   config: /config/log-docker.xml
   level:
-    root: warn
-    at.wrk.fmd.mls.message: debug
+    at.wrk.fmd.mls.message: info
