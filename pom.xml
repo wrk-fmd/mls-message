@@ -6,13 +6,23 @@
     <parent>
         <groupId>at.wrk.fmd.mls</groupId>
         <artifactId>mls-parent</artifactId>
-        <version>3.0.3-RELEASE</version>
+        <version>3.0.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>message-base</artifactId>
-    <version>3.0.0-RELEASE</version>
+    <version>3.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Message services base module</name>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/wrk-fmd/mls-packages</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <modules>
         <module>message-api</module>

@@ -8,10 +8,12 @@ services:
       args:
         MODULE: message-fleetsync
         APP: message-fleetsync
-        INSTALL: librxtx-java
+        RUNTIME: debian-rxtx
       network: host
     environment:
       SPRING_PROFILES_ACTIVE: docker
+    tmpfs:
+      - /tmp
     volumes:
       - type: bind
         source: ${MLS_MESSAGE_FLEETSYNC_CONFIG:-./message-fleetsync/src/main/resources}
@@ -35,6 +37,8 @@ services:
       network: host
     environment:
       SPRING_PROFILES_ACTIVE: docker
+    tmpfs:
+      - /tmp
     volumes:
     - type: bind
       source: ${MLS_MESSAGE_SMS_CONFIG:-./message-sms/src/main/resources}
@@ -54,6 +58,8 @@ services:
       network: host
     environment:
       SPRING_PROFILES_ACTIVE: docker
+    tmpfs:
+      - /tmp
     volumes:
     - type: bind
       source: ${MLS_MESSAGE_TETRA_CONFIG:-./message-tetra/src/main/resources}
