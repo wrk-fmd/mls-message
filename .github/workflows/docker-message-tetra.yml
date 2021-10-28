@@ -1,0 +1,26 @@
+name: Build mls-message-tetra Docker image
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+    paths:
+      - .github/workflows/docker-message-tetra.yml
+      - message-api/**
+      - message-common/**
+      - message-tetra/**
+      - pom.xml
+      - Dockerfile
+
+jobs:
+  deploy:
+    uses: wrk-fmd/mls-packages/.github/workflows/docker-build.yml@main
+    with:
+      PROJECT_MODULE: message-tetra
+      PROJECT_APP: message-tetra
+      DOCKER_NAME: wrkfmdit/mls-message-tetra
+    secrets:
+      MLS_PACKAGES_TOKEN: ${{ secrets.MLS_PACKAGES_TOKEN }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

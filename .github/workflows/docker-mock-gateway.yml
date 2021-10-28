@@ -1,0 +1,20 @@
+name: Build mls-message-fleetsync Docker image
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+    paths:
+      - .github/workflows/docker-mock-gateway.yml
+      - mock-gateway
+
+jobs:
+  deploy:
+    uses: wrk-fmd/mls-packages/.github/workflows/docker-build.yml@main
+    with:
+      DOCKER_CONTEXT: ./mock-gateway
+      DOCKER_NAME: wrkfmdit/mls-message-mock-gateway
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
