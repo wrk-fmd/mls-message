@@ -19,6 +19,7 @@ jobs:
     with:
       PROJECT_MODULE: message-fleetsync
       PROJECT_APP: message-fleetsync
+      BUILD_ARGS: RUNTIME=debian-rxtx
       DOCKER_NAME: wrkfmdit/mls-message-fleetsync
     secrets:
       MLS_PACKAGES_TOKEN: ${{ secrets.MLS_PACKAGES_TOKEN }}
