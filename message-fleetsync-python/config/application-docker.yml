@@ -1,0 +1,13 @@
+service-name: kenwood
+forwarders:
+  - name: amqp-localhost
+    type: amqp
+    host: mls-amqp
+    username: mls-rabbitmq-user
+    password: mls-rabbitmq-pass
+    exchange: message.incoming
+  - name: http-localhost
+    type: http
+    url: http://mls-message-mock-gateway:8000/coceso/data/radio/messages
+    headers:
+      Authorization: foobarbaz

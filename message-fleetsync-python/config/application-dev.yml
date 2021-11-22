@@ -1,0 +1,10 @@
+service-name: kenwood
+interval: 15
+forwarders:
+  - name: amqp-localhost
+    type: amqp
+    host: localhost
+    username: mls-rabbitmq-user
+    password: mls-rabbitmq-pass
+    exchange: message.incoming
+loglevel: INFO

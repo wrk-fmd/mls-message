@@ -27,6 +27,20 @@ services:
         target: /dev
         read_only: true
 
+  mls-message-fleetsync-python:
+    image: wrkfmdit/mls-message-fleetsync-python:${MLS_TAG:-latest}
+    build:
+      context: message-fleetsync-python
+    volumes:
+      - type: bind
+        source: ${MLS_MESSAGE_FLEETSYNC_PYTHON_CONFIG:-./message-fleetsync-python/config}
+        target: /config
+        read_only: true
+      - type: bind
+        source: /dev
+        target: /dev
+        read_only: true
+
   mls-message-sms:
     image: wrkfmdit/mls-message-sms:${MLS_TAG:-latest}
     build:
@@ -40,13 +54,13 @@ services:
     tmpfs:
       - /tmp
     volumes:
-    - type: bind
-      source: ${MLS_MESSAGE_SMS_CONFIG:-./message-sms/src/main/resources}
-      target: /config
-      read_only: true
-    - type: bind
-      source: ${MLS_LOG:-./log}
-      target: /log
+      - type: bind
+        source: ${MLS_MESSAGE_SMS_CONFIG:-./message-sms/src/main/resources}
+        target: /config
+        read_only: true
+      - type: bind
+        source: ${MLS_LOG:-./log}
+        target: /log
 
   mls-message-tetra:
     image: wrkfmdit/mls-message-tetra:${MLS_TAG:-latest}
@@ -61,13 +75,13 @@ services:
     tmpfs:
       - /tmp
     volumes:
-    - type: bind
-      source: ${MLS_MESSAGE_TETRA_CONFIG:-./message-tetra/src/main/resources}
-      target: /config
-      read_only: true
-    - type: bind
-      source: ${MLS_LOG:-./log}
-      target: /log
+      - type: bind
+        source: ${MLS_MESSAGE_TETRA_CONFIG:-./message-tetra/src/main/resources}
+        target: /config
+        read_only: true
+      - type: bind
+        source: ${MLS_LOG:-./log}
+        target: /log
 
   mls-message-mock-gateway:
     build:

@@ -32,6 +32,9 @@ target
 # ignore private maven cache
 .m2
 
+# ignore Python cache
+__pycache__
+
 # except explicitely added empty directories
 !.gitkeep
 
