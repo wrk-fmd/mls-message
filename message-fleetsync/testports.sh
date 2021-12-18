@@ -6,20 +6,29 @@
 sleep 3
 chmod 666 /dev/ttyUSB50 /dev/ttyUSB51
 
+function sendcall() {
+  printf "\x02T1%02d\x03" $((($3 * 3 + 1) % 100))
+  printf "\x02%s%s%s%02d\x03" "$1" "$2" "$2" $((($3 * 3 + 2) % 100))
+  printf "\x02T0%02d\x03" $((($3 * 3 + 3) % 100))
+}
+
+seq=0
 while true ; do
   if [ $RANDOM -le 3000 ]; then
-    echo -ne "\x02E3456789\x03" > /dev/ttyIN50
+    sendcall "E" "3456789" $seq > /dev/ttyIN50
   else
-    echo -ne "\x02I13456789\x03" > /dev/ttyIN50
+    sendcall "I1" "3456789" $seq > /dev/ttyIN50
   fi
 
   sleep $((10+RANDOM/6000))
 
   if [ $RANDOM -le 3000 ]; then
-    echo -ne "\x02E1234567\x03" > /dev/ttyIN51
+    sendcall "E" "1234567" $seq > /dev/ttyIN51
   else
-    echo -ne "\x02I11234567\x03" > /dev/ttyIN51
+    sendcall "I1" "1234567" $seq > /dev/ttyIN51
   fi
 
   sleep $((30+RANDOM/3000))
+
+  ((seq+=1))
 done;
