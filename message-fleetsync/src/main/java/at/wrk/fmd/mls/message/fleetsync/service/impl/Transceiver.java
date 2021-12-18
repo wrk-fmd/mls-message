@@ -32,8 +32,8 @@ class Transceiver implements AutoCloseable {
     private static final byte STX = 0x02, ETX = 0x03, POISON = 0x00;
     private static final int ANI_LENGTH = 7; // fleet 3, id 4
     private static final Pattern ANI_PATTERN = Pattern.compile(String.format("^\\d{%d}$", ANI_LENGTH));
-    private static final Pattern CALL_PATTERN = Pattern.compile(String.format("^I1(\\d{%d})$", ANI_LENGTH));
-    private static final Pattern EMERGENCY_PATTERN = Pattern.compile(String.format("^E(\\d{%d})$", ANI_LENGTH));
+    private static final Pattern CALL_PATTERN = Pattern.compile(String.format("^I1(\\d{%d})", ANI_LENGTH));
+    private static final Pattern EMERGENCY_PATTERN = Pattern.compile(String.format("^E(\\d{%d})", ANI_LENGTH));
 
     private final RadioService listener;
     private final String name;
