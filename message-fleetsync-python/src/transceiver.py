@@ -20,7 +20,6 @@ class Transceiver:
     def close(self):
         self.log.info('Closing transceiver')
         try:
-            self.worker.stop()
             self.serial.close()
         except Exception as ex:
-            self.log.info('Exception on closing: %s', ex)
+            self.log.warning('Exception on closing serial port: %s', ex)
