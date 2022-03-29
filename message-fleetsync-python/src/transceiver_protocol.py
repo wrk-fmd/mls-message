@@ -52,10 +52,26 @@ class TransceiverProtocol(serial.threaded.Packetizer):
         if message.startswith(self.CALL_START):
             # Got a regular PTT event
             ani = message[len(self.CALL_START):].decode()
+
+            # ANI is sent twice in one message
+            ani_mid = len(ani) // 2
+            ani_first = ani[:ani_mid]
+            ani_second = ani[ani_mid:]
+            if not ani_first == ani_second:
+                # Just log if ANIs don't match
+                self.log.info('Got two different ANIs in one message: %s, %s', ani_first, ani_second)
+
             emergency = False
         elif message.startswith(self.EMERGENCY_START):
             # Got an emergency event
             ani = message[len(self.EMERGENCY_START):].decode()
+
+            # ANI is followed by "99"
+            if not ani[-2:] == '99':
+                # Just log if suffix doesn't match
+                self.log.info('Got wrong emergency suffix: %s', ani)
+
+            ani_first = ani[:-2]
             emergency = True
         elif message in self.IGNORED_START:
             # These are always sent before/after a message (do we even care?)
@@ -65,14 +81,6 @@ class TransceiverProtocol(serial.threaded.Packetizer):
             # Got something else, log it
             self.log.info('Dropping unknown message %s', message)
             return
-
-        # ANI is sent twice in one message
-        ani_mid = len(ani) // 2
-        ani_first = ani[:ani_mid]
-        ani_second = ani[ani_mid:]
-        if not ani_first == ani_second:
-            # Just log if ANIs don't match
-            self.log.info('Got two different ANIs in one message: %s, %s', ani_first, ani_second)
 
         if not self.ANI_PATTERN.match(ani_first):
             self.log.info('Dropping invalid ANI %s', ani_first)
