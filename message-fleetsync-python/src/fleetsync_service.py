@@ -20,7 +20,12 @@ class FleetsyncService:
 
     def __init__(self, config):
         self.handler = MessageHandler(config['service-name'], list(map(create_forwarder, config['forwarders'])))
-        self.manager = TransceiverManager(self.handler)
+
+        if 'device-filter' in config:
+            self.manager = TransceiverManager(self.handler, config['device-filter'])
+        else:
+            self.manager = TransceiverManager(self.handler)
+
         if 'interval' in config:
             self.interval = config['interval']
         else:
